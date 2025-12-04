@@ -32,7 +32,7 @@ export default function PersonalitySelector({ selected, onSelect }: PersonalityS
               )}
             </div>
             <p className="text-sm text-gray-600 mb-2">{personality.description}</p>
-            <p className="text-xs text-gray-500 italic">"{personality.tone}"</p>
+            <p className="text-xs text-gray-500 italic">&quot;{personality.tone}&quot;</p>
           </button>
         ))}
       </div>

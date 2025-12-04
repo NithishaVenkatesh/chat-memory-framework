@@ -42,7 +42,7 @@ export default function MemoryDisplay({ memory }: MemoryDisplayProps) {
                   <ul className="mt-2 space-y-1 text-xs text-gray-600">
                     {pref.evidence.map((ev, i) => (
                       <li key={i} className="pl-2 border-l-2 border-gray-200">
-                        "{ev.substring(0, 100)}{ev.length > 100 ? '...' : ''}"
+                        &quot;{ev.substring(0, 100)}{ev.length > 100 ? '...' : ''}&quot;
                       </li>
                     ))}
                   </ul>

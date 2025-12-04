@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { ChatMessage, ExtractedMemory, PersonalityType } from '@/lib/types';
 import ChatMessageComponent from '@/components/ChatMessage';
 import MemoryDisplay from '@/components/MemoryDisplay';
@@ -27,7 +27,7 @@ export default function Home() {
     scrollToBottom();
   }, [messages]);
 
-  const extractMemory = async (messagesToExtract?: ChatMessage[]) => {
+  const extractMemory = useCallback(async (messagesToExtract?: ChatMessage[]) => {
     const messagesToUse = messagesToExtract || messages;
     const userMessageCount = messagesToUse.filter((m: ChatMessage) => m.role === 'user').length;
     
@@ -65,7 +65,7 @@ export default function Home() {
     } finally {
       setIsExtractingMemory(false);
     }
-  };
+  }, [messages]);
 
   // Extract memory when we have 5, 10, 15, 20, 25, or 30 user messages
   useEffect(() => {
@@ -73,7 +73,7 @@ export default function Home() {
     if (userMessageCount > 0 && userMessageCount % 5 === 0 && userMessageCount <= 30) {
       extractMemory(messages);
     }
-  }, [messages]);
+  }, [messages, extractMemory]);
 
   const handleSend = async () => {
     if (!input.trim() || isLoading) return;
@@ -397,7 +397,7 @@ export default function Home() {
                 {messages.length === 0 ? (
                   <div className="text-center text-gray-500 mt-20">
                     <p>Start a conversation to see memory extraction in action!</p>
-                    <p className="text-sm mt-2">Try: "I love coffee and working late at night"</p>
+                    <p className="text-sm mt-2">Try: &quot;I love coffee and working late at night&quot;</p>
                   </div>
                 ) : (
                   messages.map((message: ChatMessage) => (
