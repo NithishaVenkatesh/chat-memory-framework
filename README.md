@@ -105,6 +105,3 @@ npm start        # Start production server
 npm run lint     # Run linter
 ```
 
-## License
-
-MIT License
